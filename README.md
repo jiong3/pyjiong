@@ -2,7 +2,7 @@
 
 License: GPLv3
 
-A very small module for working with pleco/skritter-style lists and Chinese. Right now there's no setup script so it can't be installed, just copy the pyjiong folder into your working directory.
+A very small python3 module for working with pleco/skritter-style lists and Chinese. Right now there's no setup script so it can't be installed, just copy the pyjiong folder into your working directory.
 
 ## Usage
 
