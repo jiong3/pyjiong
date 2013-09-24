@@ -1,0 +1,22 @@
+// HSK level 1
+啊	a1	interj: ah
+啊	a	part: ah
+矮	ai3	adj: short; low
+爱	ai4	v: love [愛]
+爱人	ai4ren2	n: husband; wife; sweetheart [愛人]
+安静	an1jing4	adj: quiet; peaceful [安靜]
+安排	an1pai2	v, n: plan; arrange
+// HSK level 2
+阿	a1(a1ge1)	pref: prefix used before kinship terms; (brother)
+阿拉伯语	a1la1bo2yu3(a1la1bo2wen2)	n: Arabic [阿拉伯語]
+阿姨	a1yi2	n: auntie; nurse (in a family)
+挨	ai1	v: get close to; be next to; by
+// HSK level 3
+哎哟	ai1yo1	interj: oh; ah [哎喲]
+癌	ai2	n: cancer; carcinoma
+安	an1	v, adj: settle; stabilize; settled; stable
+安定	an1ding4	adj, v: stable; stabilize
+// HSK level 4
+哀悼	ai1dao4	v: mourn
+哀求	ai1qiu2	v: beseech; implore
+艾滋病	ai4zi1bing4	n: AIDS

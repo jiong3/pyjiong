@@ -1,0 +1,33 @@
+U+611C	kCantonese	hip3 hip6
+U+611C	kDefinition	be satisfied, be comfortable
+U+611C	kHangul	협
+U+611C	kHanyuPinyin	42325.130:qiè
+U+611C	kJapaneseKun	KOKOROYOI
+U+611C	kJapaneseOn	KYOU
+U+611C	kKorean	HYEP
+U+611C	kMandarin	qiè
+U+611C	kTang	kep
+U+611C	kXHC1983	0924.051:qiè
+U+611D	kHanyuPinyin	42326.080:yǎn
+U+611D	kMandarin	yǎn
+U+611E	kCantonese	no6
+U+611E	kDefinition	timid, apprehensive
+U+611E	kJapaneseKun	YOWAI OSORERU
+U+611E	kJapaneseOn	ZEN NEN TA NA
+U+611E	kMandarin	nuò
+U+7CEB	kHanyuPinyin	53161.230:huán
+U+7CEB	kJapaneseKun	MOCHI OKOSHI
+U+7CEB	kJapaneseOn	KAI GEN
+U+7CEB	kMandarin	huán
+U+7CEF	kCantonese	no6
+U+7CEF	kDefinition	glutinous rice; glutinous, sticky
+U+7CEF	kHangul	나
+U+7CEF	kHanyuPinyin	53162.200:nuò
+U+7CEF	kJapaneseKun	MOCHIGOME
+U+7CEF	kJapaneseOn	DA NA
+U+7CEF	kKorean	NA
+U+7CEF	kMandarin	nuò
+U+7CEF	kXHC1983	0843.080:nuò
+U+3B8F	kCantonese	noi6
+U+3B8F	kHanyuPinyin	21244.040:nài,nì,nà 80020.040:nà,nài,nì
+U+3B8F	kMandarin	nài
