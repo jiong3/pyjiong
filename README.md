@@ -7,8 +7,9 @@ A very small python3 module for working with pleco/skritter-style lists and Chin
 ## Usage
 
 - convert pinyin formats (numbers and tone marks) (tools.py)
+- split pinyin into initial and final sound (tools.py)
 - get only chinese characters from a string (tools.py)
-- read cedict/unihan files (filesupport.py)
+- read cedict/unihan/tatoeba files (filesupport.py)
 - mix/diff two lists (chlist.py), have a look at the example frequencyHSK to see how to sort a list of HSK words in the order of a frequency list
 
 ## Todo
@@ -21,5 +22,5 @@ A very small python3 module for working with pleco/skritter-style lists and Chin
 
 - make it a python package
 - compare lists, get similarity measure
-- add support for tatoeba files
+- skritter api?
 - introduce a way to print flashcards/sheets from lists using jinja2 and wkhtmltopdf or other solutions
