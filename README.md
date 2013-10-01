@@ -24,3 +24,4 @@ A very small python3 module for working with pleco/skritter-style lists and Chin
 - compare lists, get similarity measure
 - skritter api?
 - introduce a way to print flashcards/sheets from lists using jinja2 and wkhtmltopdf or other solutions
+- experiment with https://github.com/fxsjy/jieba
