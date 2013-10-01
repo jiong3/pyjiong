@@ -150,13 +150,28 @@ def save_text_list(word_file, sections, words, custom=None):
 
 def open_cedict(cedict_file, key='trad'):
     """
-    output format:
-    { '囧': (
-        ('simp/trad', 'jiong1', (meaning1, meaning2), {}),
-        ('simp/trad', 'hao3', (meaningA), {'tw': 'hao2', 'cl':'char[piny]')}),
-        ('simp/trad', 'la4', (meaningX, meaningY), {})
-        )
-    }
+    Open a cedict file as a python dictionary.
+
+    Args:
+        cedict_file (file): The file object
+        key ('trad'/'simp'): The property which is used as a key in the
+            python dictionary.
+    Returns:
+        cedict (dict): The dictionary has the following structure:
+            { '囧': [
+                ('simp/trad', 'jiong1', (meaning1, meaning2), {}),
+                ('simp/trad', 'hao3', (meaningA), {'tw': 'hao2',
+                                                   'cl':'char[piny]'}),
+                ('simp/trad', 'la4', (meaningX, meaningY), {})
+                ]
+            }
+            Each pronunciation has a separate entry, which consists of:
+            1. Either the simplified or traditional version of the key.
+            2. The pinyin, space seperated as found in the file.
+            3. A tuple with all the meanings
+            4. A dictionary with extra info if available, for now:
+                tw for taiwanese pronunciation
+                cl for a measure word
     """
     cedict = {}
     line_pattern = re.compile("^(.*?)\s{1}(.*?)\s{1}(\[.*?\])\s{1}(\/.*\/)$")
@@ -237,3 +252,97 @@ def open_unihan(unihan_file, kvalues):
                 unihan_dic[hanzi] = {kvalue: content}
 
     return unihan_dic
+
+def open_tatoeba(sentences=None,
+                 links=None,
+                 primary_lang='cmn',
+                 secondary_langs = None):
+    """
+    Get grouped sentences from the tatoeba files.
+
+    Args:
+        sentences (file): The file with the sentences, detailed or not
+        links (file): The file with the links between sentences
+        primary_lang (str): The language code for the primary language for
+            which you want to find translations, default 'cmn' (Chinese)
+        secondary_langs([str]): The languages for the translations, a sentence
+            is only included in the result if there is a version in the primary
+            language and at least one of the secondary languages
+    Returns:
+        result (list): A list of the sentences, structured like this:
+            [
+            ((1st sent. in prim. lang.),
+            (1st sent. in 1st sec. lang.),
+            (1st sent. in 2nd sec. lang.)),
+            ((2nd sent. in prim. lang), (...), (...))
+            ...
+            ]
+    """
+
+    if not secondary_langs:
+        secondary_langs = ['eng']
+    all_langs = {primary_lang: set()}
+    for lang in secondary_langs:
+        all_langs[lang] = set()
+
+    # first run: get ids of all sentences in relevant languages
+    for line in sentences:
+        line = line.strip()
+        line = line.split('\t')
+        sentence_id = line[0]
+        sentence_lang = line[1]
+        if sentence_lang in all_langs:
+            all_langs[sentence_lang].add(sentence_id)
+
+    all_sec_lang_ids = set()
+    for lang in secondary_langs:
+        all_sec_lang_ids.update(all_langs[lang])
+
+    # get links between sentences
+    primary_lang_index = {}
+    secondary_lang_relevant = set()
+    for line in links:
+        line = line.strip()
+        line = line.split('\t')
+        id1 = line[0]
+        id2 = line[1]
+        if (id1 in primary_lang_index) and\
+        (id2 in all_sec_lang_ids):
+            primary_lang_index[id1].append(id2)
+            secondary_lang_relevant.add(id2)
+        else:
+            if (id1 in all_langs[primary_lang]) and\
+            (id2 in all_sec_lang_ids):
+                primary_lang_index[id1] = [id2]
+                secondary_lang_relevant.add(id2)
+
+    relevant_sentences = {}
+
+    # second run: get relevant sentences
+    sentences.seek(0)
+    for line in sentences:
+        line = line.strip()
+        line = line.split('\t')
+        sentence_id = line[0]
+        sentence_lang = line[1]
+        if (sentence_id in primary_lang_index) or\
+        (sentence_id in secondary_lang_relevant):
+            relevant_sentences[sentence_id] = line
+
+    result = []
+    lang_index = {}
+    for i, lang in enumerate(secondary_langs):
+        lang_index[lang] = i + 1
+
+    # group sentences and add them to result
+    boilerplate = ['' for i in range(len(secondary_langs) + 1)]
+    for id1, id2s in primary_lang_index.items():
+        item = copy.copy(boilerplate)
+        item[0] = relevant_sentences[id1]
+        for id2 in id2s:
+            sentence2 = relevant_sentences[id2]
+            lang2 = sentence2[1]
+            item[lang_index[lang2]] = sentence2
+        result.append(item)
+
+    return result
